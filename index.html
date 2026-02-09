@@ -1,0 +1,697 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <!-- Métadonnées de base pour le site -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pour Toi Mon Amour - Édition Ultime 💚</title>
+    
+    <!-- Importation des polices Google Fonts pour typographie élégante -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Great+Vibes&family=Poppins:wght@300;400;600&family=Courier+Prime&display=swap" rel="stylesheet">
+    
+    <!-- Lien vers le fichier CSS externe -->
+    <link rel="stylesheet" href="assets/css/styles.css">
+    <audio id="secretAudio" src="assets/audio/message-secret.mp3"></audio>
+
+</head>
+<body>
+    
+    <!-- Conteneur pour les cœurs flottants animés -->
+    <div class="floating-hearts" id="floatingHearts"></div>
+    
+    <!-- ========== ÉCRAN D'ACCUEIL INTERACTIF ========== -->
+    <div class="welcome-screen" id="welcomeScreen">
+        <div class="welcome-content">
+            <!-- Animation de cœur pulsant -->
+            <div class="heart-animation">
+                <svg width="150" height="150" viewBox="0 0 100 100">
+                    <path d="M50 90 C50 90 10 65 10 40 C10 25 20 15 35 15 C42 15 48 18 50 25 C52 18 58 15 65 15 C80 15 90 25 90 40 C90 65 50 90 50 90 Z" 
+                          fill="#66BB6A" 
+                          stroke="#2E7D32" 
+                          stroke-width="2"
+                          class="beating-heart"/>
+                </svg>
+            </div>
+            
+            <!-- Message d'accueil personnel -->
+            <h1 class="welcome-title">Pour Toi, Mon Amour 💚</h1>
+            <p class="welcome-subtitle">Prépare-toi à un voyage émotionnel inoubliable...</p>
+            
+            <!-- Bouton pour entrer dans le site -->
+            <button class="enter-button" id="enterButton">
+                <span>Entrer dans notre histoire</span>
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                    <path d="M5 12h14M12 5l7 7-7 7"/>
+                </svg>
+            </button>
+        </div>
+        
+        <!-- Particules de fond animées -->
+        <canvas id="particlesCanvas"></canvas>
+    </div>
+    
+    <!-- Conteneur principal du site (caché au début) -->
+    <div class="main-site" id="mainSite" style="display: none;">
+    
+    <!-- ========== NAVIGATION STICKY (NOUVEAU) ========== -->
+    <nav class="sticky-nav" id="stickyNav">
+
+        
+
+
+        <div class="nav-container">
+
+             <!-- LOGO À GAUCHE -->
+         <div class="nav-logo">
+            <img src="assets/images/logo.png" alt="Logo" />
+        </div>
+
+        <div class="nav-links">
+            <a href="#home" class="nav-item">Accueil</a>
+            <a href="#letter" class="nav-item">Lettre</a>
+            <a href="#reasons" class="nav-item">Raison</a>
+            <a href="#gifts" class="nav-item">Cadeau</a>
+            <a href="#memories" class="nav-item">Souvenir</a>
+            <a href="#garden" class="nav-item">Jardin</a>
+            <a href="#quiz" class="nav-item">Question</a>
+            <a href="#secret" class="nav-item">Secret</a>
+        </div>
+    </nav>
+    
+    <!-- ========== SECTION HERO ========== -->
+    <section class="hero-section" id="home">
+        <div class="hero-bg-wrapper">
+            <img src="assets/images/hero-bg.jpg" alt="Background" class="hero-bg-img">
+        </div>
+        <div class="hero-content">
+            
+            <h1 class="typewriter" id="mainTitle">Joyeuse Saint-Valentin mon amour ❤️</h1>
+            <p class="subtitle fade-in-delayed">Une histoire d'amour unique, la nôtre...</p>
+            
+            <!-- Compte à rebours -->
+            <div class="countdown-container fade-in-delayed">
+                <p class="countdown-label">Nous sommes ensemble depuis :</p>
+                <div class="countdown-display" id="countdownDisplay">
+                    <!-- Le contenu sera généré par JavaScript -->
+                    <div class="time-together">
+                        <div class="time-number">Chargement...</div>
+                    </div>
+                </div>
+            </div>
+            
+            <button class="cta-button pulse" onclick="scrollToSection('letter')">
+                Découvre mes messages 💚
+            </button>
+        </div>
+        
+        <div class="scroll-indicator">
+            <div class="mouse">
+                <div class="wheel"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== NOUVELLE SECTION 1 : LETTRE D'AMOUR ANIMÉE ========== -->
+    <section class="love-letter-section" id="letter">
+        <div class="container">
+            <h2 class="section-title slide-in-left">Ma Lettre Pour Toi 💌</h2>
+            <p class="section-subtitle">Regarde-moi l'écrire devant tes yeux...</p>
+            
+            <div class="letter-container">
+                <!-- Papier à lettre avec texture -->
+                <div class="letter-paper">
+                    <div class="letter-header">
+                        <p class="letter-date" id="letterDate"></p>
+                        <p class="letter-greeting">Mon amour,</p>
+                    </div>
+                    
+                    <!-- Le texte qui s'écrit en temps réel -->
+                    <div class="letter-body" id="letterBody"></div>
+                    
+                    <div class="letter-footer">
+                        <p class="letter-signature">Avec tout mon amour,</p>
+                        <p class="letter-name">Ton âme sœur 💚</p>
+                    </div>
+                    
+                    <!-- Animation d'écriture (stylo qui bouge) -->
+                    <div class="pen-animation" id="penAnimation">
+                        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#2E7D32" stroke-width="2">
+                            <path d="M12 19l7-7 3 3-7 7-3-3z"/>
+                            <path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"/>
+                            <path d="M2 2l7.586 7.586"/>
+                        </svg>
+                    </div>
+                </div>
+                
+                <!-- Contrôles -->
+                <div class="letter-controls">
+                    <button class="letter-btn" id="startLetter">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M8 5v14l11-7z"/>
+                        </svg>
+                        Commence à écrire
+                    </button>
+                    <button class="letter-btn" id="pauseLetter" style="display:none;">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M6 4h4v16H6V4zm8 0h4v16h-4V4z"/>
+                        </svg>
+                        Pause
+                    </button>
+                    <button class="letter-btn" id="resetLetter">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12 5V1L7 6l5 5V7c3.31 0 6 2.69 6 6s-2.69 6-6 6-6-2.69-6-6H4c0 4.42 3.58 8 8 8s8-3.58 8-8-3.58-8-8-8z"/>
+                        </svg>
+                        Recommencer
+                    </button>
+                </div>
+                
+                <!-- Option son de frappe clavier -->
+                <div class="sound-toggle">
+                    <label>
+                        <input type="checkbox" id="typingSoundToggle" checked>
+                        <span>Son de machine à écrire 🔊</span>
+                    </label>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== NOUVELLE SECTION 2 : 100 RAISONS DE T'AIMER ========== -->
+    <section class="reasons-section" id="reasons">
+        <div class="container">
+            <h2 class="section-title slide-in-right">100 Raisons Pourquoi Je T'aime 💯</h2>
+            <p class="section-subtitle">Tire une carte pour découvrir une raison...</p>
+            
+            <!-- Compteur de raisons découvertes -->
+            <div class="reasons-counter">
+                <p>Raisons découvertes : <span id="reasonsCount">0</span>/100</p>
+                <div class="progress-bar">
+                    <div class="progress-fill" id="reasonsProgress"></div>
+                </div>
+            </div>
+            
+            <!-- Deck de cartes -->
+            <div class="card-deck">
+                <!-- Pile de cartes (5 visibles) -->
+                <div class="card-stack" id="cardStack">
+                    <div class="reason-card card-5"></div>
+                    <div class="reason-card card-4"></div>
+                    <div class="reason-card card-3"></div>
+                    <div class="reason-card card-2"></div>
+                    <div class="reason-card card-1" id="topCard">
+                        <div class="card-content">
+                            <div class="card-number">#<span id="cardNumber">1</span></div>
+                            <div class="card-emoji" id="cardEmoji">💚</div>
+                            <p class="card-reason" id="cardReason">Clique pour découvrir...</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Boutons d'action -->
+                <div class="card-actions">
+                    <button class="card-btn draw-btn" id="drawCard">
+                        Tirer une carte 🎴
+                    </button>
+                    <button class="card-btn shuffle-btn" id="shuffleCards">
+                        Mélanger 🔀
+                    </button>
+                    <button class="card-btn" id="showAllReasons">
+                        Voir toutes les raisons 👀
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Raisons collectées -->
+            <div class="collected-reasons" id="collectedReasons">
+                <h3>Tes raisons collectées :</h3>
+                <div class="reasons-grid" id="reasonsGrid"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== NOUVELLE SECTION 3 : CALENDRIER DES CADEAUX ========== -->
+    <section class="gifts-calendar-section" id="gifts">
+        <div class="container">
+            <h2 class="section-title slide-in-left">14 Jours de Surprises 🎁</h2>
+            <p class="section-subtitle">Un cadeau virtuel à débloquer chaque jour jusqu'à la Saint-Valentin...</p>
+            
+            <!-- Progression -->
+            <div class="gifts-progress">
+                <p>Cadeaux ouverts : <span id="giftsOpened">0</span>/14</p>
+                <div class="gifts-progress-bar">
+                    <div class="gifts-progress-fill" id="giftsProgressFill"></div>
+                </div>
+            </div>
+            
+            <!-- Grille de cadeaux -->
+            <div class="gifts-grid">
+                <!-- Les 14 cadeaux (générés dynamiquement mais structure ici) -->
+                <div class="gift-box" data-day="1">
+                    <div class="gift-wrapper">
+                        <div class="gift-lid"></div>
+                        <div class="gift-base">
+                            <div class="gift-ribbon"></div>
+                            <div class="gift-bow">🎀</div>
+                        </div>
+                    </div>
+                    <p class="gift-day">Jour 1</p>
+                </div>
+                
+                <div class="gift-box" data-day="2">
+                    <div class="gift-wrapper">
+                        <div class="gift-lid"></div>
+                        <div class="gift-base">
+                            <div class="gift-ribbon"></div>
+                            <div class="gift-bow">🎀</div>
+                        </div>
+                    </div>
+                    <p class="gift-day">Jour 2</p>
+                </div>
+                
+                <div class="gift-box" data-day="3">
+                    <div class="gift-wrapper">
+                        <div class="gift-lid"></div>
+                        <div class="gift-base">
+                            <div class="gift-ribbon"></div>
+                            <div class="gift-bow">🎀</div>
+                        </div>
+                    </div>
+                    <p class="gift-day">Jour 3</p>
+                </div>
+                
+                <div class="gift-box" data-day="4">
+                    <div class="gift-wrapper">
+                        <div class="gift-lid"></div>
+                        <div class="gift-base">
+                            <div class="gift-ribbon"></div>
+                            <div class="gift-bow">🎀</div>
+                        </div>
+                    </div>
+                    <p class="gift-day">Jour 4</p>
+                </div>
+                
+                <div class="gift-box" data-day="5">
+                    <div class="gift-wrapper">
+                        <div class="gift-lid"></div>
+                        <div class="gift-base">
+                            <div class="gift-ribbon"></div>
+                            <div class="gift-bow">🎀</div>
+                        </div>
+                    </div>
+                    <p class="gift-day">Jour 5</p>
+                </div>
+                
+                <div class="gift-box" data-day="6">
+                    <div class="gift-wrapper">
+                        <div class="gift-lid"></div>
+                        <div class="gift-base">
+                            <div class="gift-ribbon"></div>
+                            <div class="gift-bow">🎀</div>
+                        </div>
+                    </div>
+                    <p class="gift-day">Jour 6</p>
+                </div>
+                
+                <div class="gift-box" data-day="7">
+                    <div class="gift-wrapper">
+                        <div class="gift-lid"></div>
+                        <div class="gift-base">
+                            <div class="gift-ribbon"></div>
+                            <div class="gift-bow">🎀</div>
+                        </div>
+                    </div>
+                    <p class="gift-day">Jour 7</p>
+                </div>
+                
+                <div class="gift-box" data-day="8">
+                    <div class="gift-wrapper">
+                        <div class="gift-lid"></div>
+                        <div class="gift-base">
+                            <div class="gift-ribbon"></div>
+                            <div class="gift-bow">🎀</div>
+                        </div>
+                    </div>
+                    <p class="gift-day">Jour 8</p>
+                </div>
+                
+                <div class="gift-box" data-day="9">
+                    <div class="gift-wrapper">
+                        <div class="gift-lid"></div>
+                        <div class="gift-base">
+                            <div class="gift-ribbon"></div>
+                            <div class="gift-bow">🎀</div>
+                        </div>
+                    </div>
+                    <p class="gift-day">Jour 9</p>
+                </div>
+                
+                <div class="gift-box" data-day="10">
+                    <div class="gift-wrapper">
+                        <div class="gift-lid"></div>
+                        <div class="gift-base">
+                            <div class="gift-ribbon"></div>
+                            <div class="gift-bow">🎀</div>
+                        </div>
+                    </div>
+                    <p class="gift-day">Jour 10</p>
+                </div>
+                
+                <div class="gift-box" data-day="11">
+                    <div class="gift-wrapper">
+                        <div class="gift-lid"></div>
+                        <div class="gift-base">
+                            <div class="gift-ribbon"></div>
+                            <div class="gift-bow">🎀</div>
+                        </div>
+                    </div>
+                    <p class="gift-day">Jour 11</p>
+                </div>
+                
+                <div class="gift-box" data-day="12">
+                    <div class="gift-wrapper">
+                        <div class="gift-lid"></div>
+                        <div class="gift-base">
+                            <div class="gift-ribbon"></div>
+                            <div class="gift-bow">🎀</div>
+                        </div>
+                    </div>
+                    <p class="gift-day">Jour 12</p>
+                </div>
+                
+                <div class="gift-box" data-day="13">
+                    <div class="gift-wrapper">
+                        <div class="gift-lid"></div>
+                        <div class="gift-base">
+                            <div class="gift-ribbon"></div>
+                            <div class="gift-bow">🎀</div>
+                        </div>
+                    </div>
+                    <p class="gift-day">Jour 13</p>
+                </div>
+                
+                <div class="gift-box special" data-day="14">
+                    <div class="gift-wrapper">
+                        <div class="gift-lid golden"></div>
+                        <div class="gift-base golden">
+                            <div class="gift-ribbon golden"></div>
+                            <div class="gift-bow">👑</div>
+                        </div>
+                    </div>
+                    <p class="gift-day">Saint-Valentin 💝</p>
+                </div>
+            </div>
+            
+            <!-- Option pour tout débloquer -->
+            <div class="unlock-all-container">
+                <button class="unlock-all-btn" id="unlockAllGifts">
+                    ✨ Débloquer tous les cadeaux maintenant ✨
+                </button>
+                <p class="unlock-note">(Tu ne peux plus attendre ? Je comprends 😊)</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Modal pour afficher le cadeau -->
+    <div class="gift-modal" id="giftModal">
+        <div class="gift-modal-content">
+            <span class="close-gift-modal" id="closeGiftModal">&times;</span>
+            <div class="gift-modal-inner">
+                <h2 id="giftTitle">Cadeau Jour X</h2>
+                <div class="gift-emoji" id="giftEmoji">🎁</div>
+                <p class="gift-message" id="giftMessage"></p>
+                <div class="gift-extra" id="giftExtra"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ========== SECTION SOUVENIRS - GALERIE PHOTO INTERACTIVE ========== -->
+    <section class="memories-section" id="memories">
+        <div class="container">
+            <h2 class="section-title slide-in-left">Nos Souvenirs Précieux 📸</h2>
+            <p class="section-subtitle">Chaque photo raconte notre histoire...</p>
+            
+            <!-- Filtre de souvenirs -->
+            <div class="memories-filter">
+                <button class="filter-memory-btn active" data-filter="all">Tous</button>
+                <button class="filter-memory-btn" data-filter="couple">Nous Deux 💑</button>
+                <button class="filter-memory-btn" data-filter="voyage">Voyages ✈️</button>
+                <button class="filter-memory-btn" data-filter="special">Moments Spéciaux 🎉</button>
+            </div>
+            
+            <!-- Grille de souvenirs -->
+            <div class="memories-grid" id="memoriesGrid">
+                <!-- Les photos seront générées par JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Modal pour afficher la photo en grand -->
+    <div class="memory-modal" id="memoryModal">
+        <div class="memory-modal-overlay"></div>
+        <div class="memory-modal-content">
+            <button class="memory-close" id="closeMemory">&times;</button>
+            <div class="memory-display">
+                <div class="memory-image-container">
+                    <img id="memoryImageLarge" src="" alt="Souvenir">
+                </div>
+                <div class="memory-text-container">
+                    <div class="memory-date" id="memoryDate"></div>
+                    <h3 class="memory-title" id="memoryTitle"></h3>
+                    <p class="memory-description" id="memoryDescription"></p>
+                    <div class="memory-nav">
+                        <button class="memory-prev" id="memoryPrev">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/>
+                            </svg>
+                            Précédent
+                        </button>
+                        <button class="memory-next" id="memoryNext">
+                            Suivant
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ========== NOUVELLE SECTION 5 : JARDIN D'AMOUR ========== -->
+    <section class="garden-section" id="garden">
+        <div class="container">
+            <h2 class="section-title slide-in-left">Notre Jardin d'Amour 🌹</h2>
+            <p class="section-subtitle">Regarde notre amour grandir... Une fleur pour chaque mois ensemble</p>
+            
+            <!-- Statistiques du jardin -->
+            <div class="garden-stats">
+                <div class="stat">
+                    <span class="stat-icon">🌱</span>
+                    <span class="stat-value" id="monthsTogether">0</span>
+                    <span class="stat-label">Mois ensemble</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-icon">🌸</span>
+                    <span class="stat-value" id="flowersBlossomed">0</span>
+                    <span class="stat-label">Fleurs écloses</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-icon">💚</span>
+                    <span class="stat-value">∞</span>
+                    <span class="stat-label">Amour cultivé</span>
+                </div>
+            </div>
+            
+            <!-- Le jardin lui-même -->
+            <div class="garden-container">
+                <!-- Canvas SVG pour les fleurs -->
+                <svg id="gardenSVG" viewBox="0 0 1000 400" preserveAspectRatio="xMidYMid meet">
+                    <!-- Fond du jardin -->
+                    <defs>
+                        <linearGradient id="groundGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+                            <stop offset="0%" style="stop-color:#8BC34A;stop-opacity:0.3" />
+                            <stop offset="100%" style="stop-color:#689F38;stop-opacity:0.5" />
+                        </linearGradient>
+                    </defs>
+                    
+                    <!-- Sol -->
+                    <rect x="0" y="300" width="1000" height="100" fill="url(#groundGradient)" />
+                    
+                    <!-- Les fleurs seront ajoutées ici dynamiquement -->
+                    <g id="flowersGroup"></g>
+                </svg>
+                
+                <!-- Message au clic sur fleur -->
+                <div class="flower-message" id="flowerMessage">
+                    <h3 id="flowerMonth"></h3>
+                    <p id="flowerMemory"></p>
+                </div>
+            </div>
+            
+            <!-- Bouton pour faire pousser la prochaine fleur -->
+            <div class="garden-actions">
+                <button class="grow-btn" id="growNextFlower">
+                    🌱 Faire pousser la prochaine fleur
+                </button>
+                <button class="bloom-all-btn" id="bloomAllFlowers">
+                    🌸 Faire éclore tout le jardin
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== SECTION TIMELINE (déjà existante mais améliorée) ========== -->
+    <!-- ========================================
+     SECTION QUIZ – NOTRE QUIZ D’AMOUR
+     ======================================== -->
+<section id="quiz" class="quiz-section">
+
+    <h2 class="section-title">Notre quiz 💚</h2>
+    <p class="section-subtitle">
+        Voyons si tu me connais vraiment…
+    </p>
+
+    <!-- Conteneur où le JS injecte les questions -->
+    <div id="quizContainer"></div>
+
+    <!-- Résultat final -->
+    <div id="quizScore" style="display: none;">
+        <h3>Résultat</h3>
+        <p id="scoreMessage"></p>
+    </div>
+
+</section>
+
+
+    <!-- ========== SECTION MESSAGE SECRET ========== -->
+    <section class="secret-section" id="secret">
+        <div class="container">
+            <div class="secret-lock" id="secretLock">
+                <svg width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                    <rect x="5" y="11" width="14" height="10" rx="2" ry="2"/>
+                    <path d="M12 17a1 1 0 100-2 1 1 0 000 2z"/>
+                    <path d="M8 11V7a4 4 0 018 0v4"/>
+                </svg>
+            </div>
+            
+            <button class="secret-button pulse-continuous" id="secretButton">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" style="margin-right: 10px;">
+                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-1-13h2v6h-2zm0 8h2v2h-2z"/>
+                </svg>
+                Découvrir mon message secret final 💚
+            </button>
+        </div>
+    </section>
+
+    <!-- Modal message secret -->
+    <div class="modal" id="secretModal">
+        <div class="modal-message-wrapper modal-enhanced">
+            <span class="close-modal" id="closeModal">&times;</span>
+            <div class="confetti-container" id="confettiContainer"></div>
+            
+            <h2 class="modal-title">Mon Message Final Pour Toi 💚</h2>
+            
+            <div class="audio-controls">
+                <button class="play-audio-btn" id="playMessageAudio">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M8 5v14l11-7z"/>
+                    </svg>
+                    Écoute-moi te le dire
+                </button>
+            </div>
+            
+            <p class="modal-message typewriter-modal" id="secretMessage">
+                Mon amour,
+                
+                Si tu lis ces mots, c’est que tu as traversé notre histoire, nos souvenirs, nos pas.
+                Et après tout cela, une chose reste claire dans mon cœur : Dieu a été fidèle.
+                
+                Tu es bien plus qu’un amour.
+                Tu es une paix que je n’avais jamais connue.
+                Une présence qui rassure.
+                Une douceur qui guérit.
+                Une force silencieuse qui m’élève.
+                
+                Avec toi, je respire mieux.
+                Avec toi, mon cœur est en paix.
+                Avec toi, je sais que je ne marche pas seul.
+                
+                Merci pour tes prières.
+                Merci pour ton soutien.
+                Merci pour ton amour vrai, sans bruit, sans masque.
+                Merci d’être cette femme qui craint l'eternel, qui bâtit, qui relève, qui aime avec sagesse.
+                
+                Quand le monde est agité, tu es mon calme.
+                Quand la route est floue, tu es la main que Dieu m’a donnée.
+                Quand je faiblis, tu es celle l'a meme qui m’oriente vers le ciel.
+                
+                Je ne te promets pas une vie sans tempêtes,
+                mais je te promets une main qui ne lâche pas,
+                un cœur qui choisit,
+                et une foi qui nous garde unis.
+                
+                Je t’aime avec un amour paisible.
+                Un amour qui prie.
+                Un amour qui espère.
+                Un amour qui demeure.
+                
+                Ce que Dieu a commencé avec nous,
+                Il l’achèvera.
+                
+                Je t’aime. Pour aujourd’hui. Pour demain et Pour l’éternité.
+                </p>
+                
+            
+            <button class="download-message-btn" id="downloadMessage">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/>
+                </svg>
+                Télécharger ce message
+            </button>
+        </div>
+    </div>
+
+    <!-- ========== FOOTER ========== -->
+    <footer class="footer">
+        <div class="container">
+            <p class="footer-text fade-in-scroll">
+                "Dans un océan de personnes, mes yeux te chercheront toujours, 
+                mon cœur te choisira toujours." 💚
+            </p>
+            
+            <div class="love-stats">
+                <div class="stat-item">
+                    <span class="stat-number" id="kisses">1,000+</span>
+                    <span class="stat-label">Bisous échangés</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number" id="dates">50+</span>
+                    <span class="stat-label">Rendez-vous magiques</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">∞</span>
+                    <span class="stat-label">Je t'aime dits</span>
+                </div>
+            </div>
+            
+            <div class="footer-heart pulse-slow">
+                <svg width="60" height="60" viewBox="0 0 100 100">
+                    <path d="M50 90 C50 90 10 65 10 40 C10 25 20 15 35 15 C42 15 48 18 50 25 C52 18 58 15 65 15 C80 15 90 25 90 40 C90 65 50 90 50 90 Z" 
+                          fill="#66BB6A" 
+                          stroke="#2E7D32" 
+                          stroke-width="2"/>
+                </svg>
+            </div>
+            
+            <p class="copyright" id="copyrightText">Fait avec tout mon amour © 2024 - Édition Ultime 💚</p>
+        </div>
+    </footer>
+    
+    </div> <!-- Fin main-site -->
+
+    <!-- Importation du fichier JavaScript externe -->
+    <script src="assets/js/script.js"></script>
+</body>
+</html>
