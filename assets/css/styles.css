@@ -177,19 +177,27 @@ body {
 /* ========================================
    SECTION HERO - PAGE D'ACCUEIL
    ======================================== */
-   * Section hero */
+   /* Section hero */
    .hero-section {
-       min-height: 100vh;
-       display: flex;
-       flex-direction: column;
-       justify-content: center;
-       align-items: center;
-       position: relative;
-       padding: var(--spacing-md);
-       overflow: hidden;
-       
-       /* PLUS BESOIN DE background-image ICI */
-   }
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    
+    /* ⭐ CHANGEMENT 1 : Remplacez cette ligne */
+    /* ANCIEN : */
+    /* padding: var(--spacing-md); */
+    
+    /* NOUVEAU : */
+    padding-top: 120px;
+    padding-left: var(--spacing-md);
+    padding-right: var(--spacing-md);
+    padding-bottom: var(--spacing-md);
+    
+    overflow: hidden;
+}
    
    /* Wrapper de l'image de fond */
    .hero-bg-wrapper {
@@ -1735,6 +1743,16 @@ a.nav-item {
    RESPONSIVE - MOBILE (< 768px)
    ======================================== */
 @media screen and (max-width: 768px) {
+
+    .hero-section {
+        /* Ajoutez cette ligne si elle n'existe pas : */
+        padding-top: 100px;
+        
+        /* Gardez vos autres lignes : */
+        padding-left: var(--spacing-sm);
+        padding-right: var(--spacing-sm);
+        padding-bottom: var(--spacing-sm);
+    }
     /* Afficher le hamburger */
     .hamburger {
         display: flex;
@@ -1820,7 +1838,7 @@ a.nav-item {
         height: 45px;
     }
 }
-   ======================================== */
+  
 /* ========================================
    SECTION LETTRE D'AMOUR ANIMÉE
    ======================================== */
