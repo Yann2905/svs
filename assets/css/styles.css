@@ -1524,17 +1524,8 @@ a:focus {
     outline: 3px solid var(--color-accent);
     outline-offset: 3px;
 }
-
 /* ========================================
-   NOUVELLES FONCTIONNALITÉS - VERSION ULTIME
-   ======================================== */
-/* ========================================
-   NAVIGATION COMPLÈTE - SOLUTION FINALE
-   - Logo agrandi (80px)
-   - Logo bien à gauche
-   - Nav-items bien à droite
-   - Sans carré vert
-   - Responsive
+   NAVIGATION COMPLÈTE - CSS RESPONSIVE
    ======================================== */
 
    .sticky-nav {
@@ -1546,7 +1537,7 @@ a:focus {
     background: rgb(255, 255, 255);
     backdrop-filter: blur(6px);
     box-shadow: 0 2px 10px rgba(46, 125, 50, 0.08);
-    padding: 10px 0;
+    padding: 15px 0;
     transition: transform 0.3s ease, padding 0.3s ease;
     overflow: visible !important;
 }
@@ -1567,73 +1558,85 @@ a:focus {
 .nav-container {
     display: flex;
     align-items: center;
-    
-    /* SOLUTION 1 : Space-between (Recommandé) */
     justify-content: space-between;
-    
     max-width: 1200px;
     margin: 0 auto;
     padding: 0 20px;
     overflow: visible !important;
 }
 
-/* ALTERNATIVE : Si vous voulez forcer encore plus à gauche/droite */
-/*
-.nav-container {
-    display: flex;
-    align-items: center;
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 40px; Plus de padding pour écarter davantage
-    overflow: visible !important;
-}
-
-.nav-logo {
-    margin-right: auto;
-}
-
-.nav-links {
-    margin-left: auto;
-}
-*/
-
 /* ========================================
-   LOGO - BIEN À GAUCHE, AGRANDI
+   LOGO
    ======================================== */
 .nav-logo {
     display: flex;
     align-items: center;
     overflow: visible !important;
-    flex-shrink: 0; /* Empêche le logo de rétrécir */
+    flex-shrink: 0;
+    z-index: 1001;
 }
 
 .nav-logo img {
-    /* TAILLE DU LOGO - Changez ici */
     height: 80px;
-    
     width: auto;
     cursor: pointer;
     transition: height 0.3s ease;
 }
 
-/* Animation au scroll */
 .sticky-nav.scrolled .nav-logo img {
     height: 60px;
 }
 
 /* ========================================
-   NAV-LINKS - BIEN À DROITE
+   HAMBURGER MENU (caché sur desktop)
+   ======================================== */
+.hamburger {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    cursor: pointer;
+    z-index: 1001;
+    padding: 10px;
+    background: none;
+    border: none;
+    position: relative;
+}
+
+.hamburger span {
+    width: 25px;
+    height: 3px;
+    background-color: #222;
+    transition: all 0.3s ease;
+    border-radius: 3px;
+    display: block;
+}
+
+/* Animation du hamburger quand ouvert */
+.hamburger.active span:nth-child(1) {
+    transform: rotate(45deg) translate(8px, 8px);
+}
+
+.hamburger.active span:nth-child(2) {
+    opacity: 0;
+}
+
+.hamburger.active span:nth-child(3) {
+    transform: rotate(-45deg) translate(7px, -6px);
+}
+
+/* ========================================
+   NAV-LINKS
    ======================================== */
 .nav-links {
     display: flex;
     align-items: center;
     gap: 36px;
-    flex-shrink: 0; /* Empêche les liens de rétrécir */
-    margin-left: auto; /* Force à droite (redondant avec space-between mais safe) */
+    flex-shrink: 0;
+    margin-left: auto;
 }
 
 /* ========================================
-   NAV-ITEM - SANS CARRÉ VERT
+   NAV-ITEM
    ======================================== */
 a.nav-item {
     position: relative;
@@ -1708,44 +1711,8 @@ a.nav-item {
 }
 
 /* ========================================
-   HAMBURGER MENU (pour mobile)
+   RESPONSIVE - TABLETTE
    ======================================== */
-.hamburger {
-    display: none;
-    flex-direction: column;
-    gap: 5px;
-    cursor: pointer;
-    z-index: 1001;
-    padding: 10px;
-    background: none;
-    border: none;
-}
-
-.hamburger span {
-    width: 25px;
-    height: 3px;
-    background-color: #222;
-    transition: all 0.3s ease;
-    border-radius: 3px;
-}
-
-.hamburger.active span:nth-child(1) {
-    transform: rotate(45deg) translate(8px, 8px);
-}
-
-.hamburger.active span:nth-child(2) {
-    opacity: 0;
-}
-
-.hamburger.active span:nth-child(3) {
-    transform: rotate(-45deg) translate(7px, -6px);
-}
-
-/* ========================================
-   RESPONSIVE
-   ======================================== */
-
-/* Tablette */
 @media screen and (max-width: 900px) {
     .nav-links {
         gap: 20px;
@@ -1764,12 +1731,16 @@ a.nav-item {
     }
 }
 
-/* Mobile */
+/* ========================================
+   RESPONSIVE - MOBILE (< 768px)
+   ======================================== */
 @media screen and (max-width: 768px) {
+    /* Afficher le hamburger */
     .hamburger {
         display: flex;
     }
     
+    /* Menu caché par défaut */
     .nav-links {
         position: fixed;
         top: 0;
@@ -1786,15 +1757,15 @@ a.nav-item {
         transition: right 0.4s ease;
         box-shadow: -5px 0 20px rgba(0, 0, 0, 0.1);
         padding: 20px;
-        
-        /* Sur mobile, pas besoin de margin-left auto */
         margin-left: 0;
     }
     
+    /* Menu ouvert */
     .nav-links.active {
         right: 0;
     }
     
+    /* Style des liens en mobile */
     a.nav-item {
         font-size: 18px;
         font-weight: 300;
@@ -1829,7 +1800,9 @@ a.nav-item {
     }
 }
 
-/* Petit mobile */
+/* ========================================
+   RESPONSIVE - PETIT MOBILE (< 480px)
+   ======================================== */
 @media screen and (max-width: 480px) {
     .nav-links {
         width: 80%;
@@ -1847,25 +1820,6 @@ a.nav-item {
         height: 45px;
     }
 }
-
-/* ========================================
-   RÉSUMÉ DE CE QUI A ÉTÉ FAIT
-   ========================================
-   
-   ✅ Logo agrandi (80px au lieu de 50px)
-   ✅ Logo bien à gauche (justify-content: space-between)
-   ✅ Nav-items bien à droite (justify-content: space-between)
-   ✅ overflow: visible pour que le logo ne soit pas coupé
-   ✅ Suppression du carré vert (outline: none)
-   ✅ Animation fluide au scroll
-   ✅ Menu hamburger responsive
-   ✅ Adaptation automatique sur tablette et mobile
-   
-   POUR AJUSTER :
-   - Taille du logo : ligne 73 (height: 80px)
-   - Écart entre liens : ligne 91 (gap: 36px)
-   - Padding du container : ligne 68 (padding: 0 20px)
-   
    ======================================== */
 /* ========================================
    SECTION LETTRE D'AMOUR ANIMÉE

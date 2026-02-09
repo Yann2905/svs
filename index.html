@@ -56,19 +56,24 @@
     <div class="main-site" id="mainSite" style="display: none;">
     
     <!-- ========== NAVIGATION STICKY (NOUVEAU) ========== -->
-    <nav class="sticky-nav" id="stickyNav">
-
+   <!-- ========== NAVIGATION STICKY - HTML CORRIGÉ ========== -->
+<nav class="sticky-nav" id="stickyNav">
+    <div class="nav-container">
         
-
-
-        <div class="nav-container">
-
-             <!-- LOGO À GAUCHE -->
-         <div class="nav-logo">
+        <!-- LOGO À GAUCHE -->
+        <div class="nav-logo">
             <img src="assets/images/logo.png" alt="Logo" />
         </div>
-
-        <div class="nav-links">
+        
+        <!-- ⭐ NOUVEAU : BOUTON HAMBURGER (manquait !) -->
+        <button class="hamburger" id="hamburgerBtn">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+        
+        <!-- NAV-LINKS À DROITE -->
+        <div class="nav-links" id="navLinks">
             <a href="#home" class="nav-item">Accueil</a>
             <a href="#letter" class="nav-item">Lettre</a>
             <a href="#reasons" class="nav-item">Raison</a>
@@ -78,7 +83,8 @@
             <a href="#quiz" class="nav-item">Question</a>
             <a href="#secret" class="nav-item">Secret</a>
         </div>
-    </nav>
+    </div>
+</nav>
     
     <!-- ========== SECTION HERO ========== -->
     <section class="hero-section" id="home">

@@ -2290,45 +2290,120 @@ function resetAllProgress() {
 }
 
 
-const navLinks = document.querySelectorAll('.nav-item');
+// ========================================
+// NAVIGATION RESPONSIVE - MENU HAMBURGER
+// Ajoutez ce code à votre fichier JavaScript
+// ========================================
 
-navLinks.forEach(link => {
-    link.addEventListener('click', () => {
-        navLinks.forEach(l => l.classList.remove('active'));
-        link.classList.add('active');
-    });
-});
-const sections = document.querySelectorAll('section');
-const navItems = document.querySelectorAll('.nav-item');
-
-window.addEventListener('scroll', () => {
-    let current = '';
-
-    sections.forEach(section => {
-        const sectionTop = section.offsetTop - 120;
-        const sectionHeight = section.offsetHeight;
-
-        if (scrollY >= sectionTop && scrollY < sectionTop + sectionHeight) {
-            current = section.getAttribute('id');
-        }
-    });
-
-    navItems.forEach(link => {
-        link.classList.remove('active');
-        if (link.getAttribute('href') === `#${current}`) {
-            link.classList.add('active');
-        }
-    });
-});
-
-const stickyNav = document.getElementById('stickyNav');
-
-window.addEventListener('scroll', () => {
-    if (window.scrollY > 40) {
-        stickyNav.classList.add('scrolled');
-    } else {
-        stickyNav.classList.remove('scrolled');
+document.addEventListener('DOMContentLoaded', function() {
+    
+    // ========================================
+    // MENU HAMBURGER
+    // ========================================
+    const hamburger = document.querySelector('.hamburger');
+    const navLinks = document.querySelector('.nav-links');
+    const navItems = document.querySelectorAll('.nav-item');
+    
+    // Vérifier que les éléments existent
+    if (!hamburger || !navLinks) {
+        console.error('Éléments de navigation manquants !');
+        return;
     }
+    
+    console.log('Navigation initialisée !');
+    
+    // Toggle menu au clic sur hamburger
+    hamburger.addEventListener('click', function() {
+        console.log('Hamburger cliqué !');
+        hamburger.classList.toggle('active');
+        navLinks.classList.toggle('active');
+        
+        // Bloquer le scroll du body quand menu ouvert
+        if (navLinks.classList.contains('active')) {
+            document.body.style.overflow = 'hidden';
+        } else {
+            document.body.style.overflow = '';
+        }
+    });
+    
+    // Fermer le menu quand on clique sur un lien
+    navItems.forEach(item => {
+        item.addEventListener('click', function() {
+            console.log('Nav item cliqué :', this.textContent);
+            hamburger.classList.remove('active');
+            navLinks.classList.remove('active');
+            document.body.style.overflow = '';
+        });
+    });
+    
+    // Fermer le menu si on clique en dehors
+    document.addEventListener('click', function(event) {
+        const isClickInsideNav = navLinks.contains(event.target);
+        const isClickOnHamburger = hamburger.contains(event.target);
+        
+        if (!isClickInsideNav && !isClickOnHamburger && navLinks.classList.contains('active')) {
+            hamburger.classList.remove('active');
+            navLinks.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+    });
+    
+    // Fermer le menu au redimensionnement (si on passe en desktop)
+    window.addEventListener('resize', function() {
+        if (window.innerWidth > 768) {
+            hamburger.classList.remove('active');
+            navLinks.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+    });
+    
+    // ========================================
+    // NAVIGATION ACTIVE SELON LA SECTION
+    // ========================================
+    
+    // Fonction pour mettre à jour l'élément actif selon le scroll
+    function updateActiveNavItem() {
+        const sections = document.querySelectorAll('section[id]');
+        const navItems = document.querySelectorAll('.nav-item');
+        
+        let currentSection = '';
+        
+        sections.forEach(section => {
+            const sectionTop = section.offsetTop;
+            const sectionHeight = section.clientHeight;
+            
+            if (window.pageYOffset >= sectionTop - 100) {
+                currentSection = section.getAttribute('id');
+            }
+        });
+        
+        navItems.forEach(item => {
+            item.classList.remove('active');
+            if (item.getAttribute('href') === `#${currentSection}`) {
+                item.classList.add('active');
+            }
+        });
+    }
+    
+    // Écouter le scroll
+    window.addEventListener('scroll', updateActiveNavItem);
+    
+    // Au chargement de la page
+    window.addEventListener('load', updateActiveNavItem);
+    
+    // ========================================
+    // STICKY NAV - APPARITION AU SCROLL
+    // ========================================
+    const stickyNav = document.querySelector('.sticky-nav');
+    
+    window.addEventListener('scroll', function() {
+        if (window.scrollY > 100) {
+            stickyNav.classList.add('visible');
+            stickyNav.classList.add('scrolled');
+        } else {
+            stickyNav.classList.remove('scrolled');
+        }
+    });
 });
 
 // ========================================
